@@ -1,23 +1,25 @@
 import { router } from 'expo-router'
 import React, { useCallback, useEffect, useState } from 'react'
 import {
-    ActivityIndicator,
-    Alert,
-    FlatList,
-    Image,
-    RefreshControl,
-    SafeAreaView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Image,
+  RefreshControl,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { deleteBucketImage, formatBytes, listBucketImagesPage, type BucketImageItem } from '../utils/minio'
 
   const PAGE_SIZE = 5
 
 export default function GalleryScreen() {
+  const insets = useSafeAreaInsets()
   const [items, setItems] = useState<BucketImageItem[]>([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
@@ -103,7 +105,7 @@ export default function GalleryScreen() {
     <SafeAreaView style={s.safe}>
       <StatusBar barStyle="light-content" backgroundColor="#0E0E0E" />
 
-      <View style={s.header}>
+      <View style={[s.header, { paddingTop: insets.top + 5 }]}>
         <TouchableOpacity style={s.backBtn} onPress={() => router.back()}>
           <Text style={s.backIcon}>←</Text>
         </TouchableOpacity>
@@ -165,7 +167,7 @@ const s = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 14,
+    paddingBottom: 14,   
     gap: 12,
   },
   backBtn: {
