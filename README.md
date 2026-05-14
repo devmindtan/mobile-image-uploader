@@ -6,5 +6,5 @@ Mobile app for selecting and uploading images to MinIO object storage.
 
 ```bash
 npx expo install expo-image-picker expo-file-system
-npm install @aws-sdk/client-s3 zustand nativewind
+npm install zustand nativewind
 ```
